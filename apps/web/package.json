@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@t3-oss/env-nextjs": "^0.7.1",
+    "db": "workspace:*",
     "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ui": "workspace:*"
+    "ui": "workspace:*",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.4.19",
