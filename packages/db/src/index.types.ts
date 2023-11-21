@@ -4,41 +4,41 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[]
+  | Json[];
 
 export interface Database {
   public: {
     Tables: {
       App: {
         Row: {
-          "app name": string | null
-          created_at: string
-          id: number
-        }
+          created_at: string;
+          id: number;
+          name: string | null;
+        };
         Insert: {
-          "app name"?: string | null
-          created_at?: string
-          id?: number
-        }
+          created_at?: string;
+          id?: number;
+          name?: string | null;
+        };
         Update: {
-          "app name"?: string | null
-          created_at?: string
-          id?: number
-        }
-        Relationships: []
-      }
-    }
+          created_at?: string;
+          id?: number;
+          name?: string | null;
+        };
+        Relationships: [];
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Enums: {
-      AppOS: "iOS" | "Android"
-    }
+      AppOS: 'iOS' | 'Android';
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
+      [_ in never]: never;
+    };
+  };
 }
