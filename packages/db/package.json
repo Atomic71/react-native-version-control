@@ -7,6 +7,6 @@
     "typescript": "latest"
   },
   "scripts": {
-    "build": "pnpx supabase gen types typescript --project-id 'pyevnemfxhhguvsadtir' --schema public > ./src/index.types.ts"
+    "build-db": "pnpx supabase gen types typescript --project-id 'pyevnemfxhhguvsadtir' --schema public > ./src/index.types.ts"
   }
 }
