@@ -14,7 +14,9 @@ export default function Layout({
   return (
     <>
       <UserNav />
-      <main className='max-w-80'>{children}</main>
+      <main className='max-w-80 pt-4'>
+        <div className='px-10'>{children}</div>
+      </main>
     </>
   );
 }
