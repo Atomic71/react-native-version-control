@@ -9,7 +9,7 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      App: {
+      apps: {
         Row: {
           created_at: string
           id: number
@@ -36,7 +36,7 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "App_user_id_fkey"
+            foreignKeyName: "apps_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
