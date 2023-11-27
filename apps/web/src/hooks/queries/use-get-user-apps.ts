@@ -14,7 +14,6 @@ export const useGetUserApps = () => {
       return data;
     },
     staleTime: 1000 * 5 * 60,
-    refetchOnMount: false,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
