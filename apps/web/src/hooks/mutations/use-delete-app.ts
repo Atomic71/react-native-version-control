@@ -4,10 +4,8 @@ import { browserClient } from '../../db/supabase';
 //eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- inference is better
 export const useCreateApp = ({ onSuccess }: { onSuccess: () => void }) => {
   return useMutation({
-    mutationFn: async ({ name }: { name: string }) => {
-      const data = await browserClient.from('apps').insert({
-        name,
-      });
+    mutationFn: async (id: string) => {
+      const data = await browserClient.from('apps').delete().eq('id', id);
       return data;
     },
     onSuccess,
