@@ -13,6 +13,7 @@ export default function Layout({
 }): JSX.Element {
   return (
     <>
+      {/* @ts-expect-error for some reason, it's not valid. Should be resolved by upgrading TS version*/}
       <UserNav />
       <main className='max-w-80 pt-4'>
         <div className='px-10'>{children}</div>

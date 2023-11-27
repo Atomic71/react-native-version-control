@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import { type ReactElement } from 'react';
 import { cookies } from 'next/headers';
 import { makeServerClient } from '../db/supabase';
 
-async function UserNav(): Promise<ReactElement> {
+async function UserNav(): Promise<JSX.Element> {
   const client = makeServerClient(cookies());
   const {
     data: { user },
