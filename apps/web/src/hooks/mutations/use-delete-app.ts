@@ -4,7 +4,7 @@ import { browserClient } from '../../db/supabase';
 //eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- inference is better
 export const useDeleteApp = ({ onSuccess }: { onSuccess: () => void }) => {
   return useMutation({
-    mutationFn: async (id: string) => {
+    mutationFn: async (id: number) => {
       const data = await browserClient.from('apps').delete().eq('id', id);
       return data;
     },
