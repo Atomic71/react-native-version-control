@@ -24,6 +24,8 @@ export default function UserAppsControlPanel(): JSX.Element {
     });
   }, [mutate]);
 
+  const hasApps = Boolean(query.data?.data?.length);
+
   return (
     <div>
       <div className='flex justify-between items-center mb-2'>
@@ -31,8 +33,7 @@ export default function UserAppsControlPanel(): JSX.Element {
         <Button onClick={execute}>Create a new app</Button>
       </div>
       <div>
-        <h2 className='text-xl mb-4'>Your apps</h2>
-        {Boolean(query.data?.data?.length) && (
+        {hasApps ? (
           <div className='flex gap-4'>
             {query.data?.data?.map((app) => (
               <div
@@ -46,6 +47,11 @@ export default function UserAppsControlPanel(): JSX.Element {
               </div>
             ))}
           </div>
+        ) : (
+          <p>
+            You don&apos;t have any apps yet. Create one by clicking the button
+            on the top right and following the procedure.
+          </p>
         )}
       </div>
     </div>
