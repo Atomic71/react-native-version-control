@@ -8,7 +8,8 @@ export const useGetUserApps = () => {
     queryFn: async () => {
       const data = await browserClient
         .from('apps')
-        .select('*', { count: 'exact' });
+        .select('*', { count: 'exact' })
+        .order('created_at', { ascending: false });
       return data;
     },
     staleTime: 1000 * 5 * 60,
