@@ -2,6 +2,7 @@
 
 import { Button } from '@supabase/ui';
 import { useCallback } from 'react';
+import Link from 'next/link';
 import { useCreateApp } from '../hooks/mutations/use-create-app';
 import { useGetUserApps } from '../hooks/queries/use-get-user-apps';
 
@@ -39,7 +40,9 @@ export default function UserAppsControlPanel(): JSX.Element {
                 key={app.id}
               >
                 <h3>App name: {app.name}</h3>
-                <Button>Manage</Button>
+                <Link href={`/dashboard/apps/${app.id}`}>
+                  <Button>Manage</Button>
+                </Link>
               </div>
             ))}
           </div>
