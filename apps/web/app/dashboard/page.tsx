@@ -1,31 +1,10 @@
-import { createServerClient } from '@supabase/ssr';
-import { cookies } from 'next/headers';
-import type { Database } from 'db';
-import { env } from '../../src/env.mjs';
+'use client';
+import UserAppsControlPanel from '../../src/components/user-apps-control-panel';
 
-export default async function Index(): Promise<JSX.Element> {
-  const cookieStore = cookies();
-  const client = createServerClient<Database>(
-    env.NEXT_PUBLIC_SUPABASE_URL,
-    env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    {
-      cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value;
-        },
-      },
-    }
-  );
-
-  const apps = await client.from('App').select('*');
-  const {
-    data: { user },
-  } = await client.auth.getUser();
-
+export default function Index(): JSX.Element {
   return (
     <div>
-      You are authenticated as: <code>{user?.email}</code>
-      <p>You currently have {apps.data?.length} apps.</p>
+      <UserAppsControlPanel />
     </div>
   );
 }
