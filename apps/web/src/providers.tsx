@@ -1,9 +1,16 @@
 'use client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useState } from 'react';
+
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import {
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { browserClient } from './db/supabase';
 
 // recommended setup: https://tanstack.com/query/v5/docs/react/guides/ssr
-
+const cache = new QueryCache({});
 export default function Providers({ children }): JSX.Element {
   // eslint-disable-next-line react/hook-use-state -- don't need the setState
   const [client] = useState(
@@ -16,8 +23,26 @@ export default function Providers({ children }): JSX.Element {
             staleTime: 60 * 1000,
           },
         },
+        queryCache: cache,
       })
   );
 
-  return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = browserClient.auth.onAuthStateChange((event) => {
+      if (event === 'SIGNED_OUT') {
+        cache.clear();
+      }
+    });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [client]);
+  return (
+    <QueryClientProvider client={client}>
+      {children}
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 }
