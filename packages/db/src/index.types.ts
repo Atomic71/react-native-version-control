@@ -11,30 +11,33 @@ export interface Database {
     Tables: {
       app_versions: {
         Row: {
-          app: number | null
-          app_os: Database["public"]["Enums"]["AppOS"] | null
+          app: number
+          app_os: Database["public"]["Enums"]["AppOS"]
           created_at: string
           id: number
-          is_blocked: boolean | null
-          is_latest: boolean | null
+          is_blocked: boolean
+          is_latest: boolean
+          updated_at: string | null
           version_number: string
         }
         Insert: {
-          app?: number | null
-          app_os?: Database["public"]["Enums"]["AppOS"] | null
+          app: number
+          app_os: Database["public"]["Enums"]["AppOS"]
           created_at?: string
           id?: number
-          is_blocked?: boolean | null
-          is_latest?: boolean | null
+          is_blocked?: boolean
+          is_latest?: boolean
+          updated_at?: string | null
           version_number: string
         }
         Update: {
-          app?: number | null
-          app_os?: Database["public"]["Enums"]["AppOS"] | null
+          app?: number
+          app_os?: Database["public"]["Enums"]["AppOS"]
           created_at?: string
           id?: number
-          is_blocked?: boolean | null
-          is_latest?: boolean | null
+          is_blocked?: boolean
+          is_latest?: boolean
+          updated_at?: string | null
           version_number?: string
         }
         Relationships: [
