@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { browserClient } from './db/supabase';
+import { DialogContextProvider } from './context/ctx-dialog';
 
 // recommended setup: https://tanstack.com/query/v5/docs/react/guides/ssr
 const cache = new QueryCache({});
@@ -41,7 +42,7 @@ export default function Providers({ children }): JSX.Element {
   }, [client]);
   return (
     <QueryClientProvider client={client}>
-      {children}
+      <DialogContextProvider>{children}</DialogContextProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
