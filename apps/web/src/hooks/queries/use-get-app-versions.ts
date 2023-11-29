@@ -6,7 +6,12 @@ import { keys } from './keys';
 //eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- inference is better
 export const useGetAppVersions = (id: Tables<'apps'>['id']) => {
   const query = useQuery({
-    queryKey: [keys.app_versions, id],
+    queryKey: [
+      keys.app_versions,
+      {
+        app: id,
+      },
+    ],
     queryFn: async () => {
       const data = await browserClient
         .from('app_versions')
