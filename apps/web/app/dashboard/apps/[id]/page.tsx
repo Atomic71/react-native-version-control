@@ -65,6 +65,8 @@ export default function Page({
             title: 'Create new version',
             el: (
               <AppVersionForm
+                disabled={createVersion.isPending}
+                loading={createVersion.isPending}
                 onSubmit={({ name, appOs }) => {
                   createVersion.mutate({
                     appId: app.id,

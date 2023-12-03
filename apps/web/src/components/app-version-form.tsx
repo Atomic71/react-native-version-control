@@ -1,16 +1,50 @@
 import { Button, Input } from '@supabase/ui';
-import React, { type PropsWithChildren, useState } from 'react';
-import type { Enums } from 'db';
+import React, { type PropsWithChildren, useState, useEffect } from 'react';
+import type { Enums, Tables } from 'db';
+import Radio from './core/radio';
+import Checkbox from './core/checkbox';
 
 type AppOsType = Enums<'AppOS'>;
 
+const appOsOptions = [
+  { label: 'Android', value: 'Android' },
+  { label: 'iOS', value: 'iOS' },
+];
+
 export default function AppVersionForm({
   onSubmit,
+  version,
+  disabled = false,
+  loading = false,
 }: PropsWithChildren<{
-  onSubmit: ({ name, appOs }: { name: string; appOs: AppOsType }) => void;
+  onSubmit: ({
+    name,
+    appOs,
+    isBlocked,
+    isLatest,
+  }: {
+    name: string;
+    appOs: AppOsType;
+    isBlocked: boolean;
+    isLatest: boolean;
+  }) => void;
+  version?: Tables<'app_versions'>;
+  disabled: boolean;
+  loading: boolean;
 }>): JSX.Element {
   const [name, setName] = useState<string>('');
   const [appOs, setAppOs] = useState<AppOsType>('Android');
+  const [isLatest, setIsLatest] = useState(false);
+  const [isBlocked, setIsBlocked] = useState(false);
+
+  useEffect(() => {
+    if (version) {
+      setName(version.version_number);
+      setAppOs(version.app_os);
+      setIsLatest(version.is_latest);
+      setIsBlocked(version.is_blocked);
+    }
+  }, [version]);
 
   return (
     <div className='flex justify-between flex-col'>
@@ -26,40 +60,44 @@ export default function AppVersionForm({
         </div>
         <div>
           <p>App OS</p>
-          <div className='flex gap-2'>
-            <input
-              checked={appOs === 'Android'}
+          {appOsOptions.map((item) => (
+            <Radio
+              checked={appOs === item.value}
+              key={item.value}
+              label={item.label}
               name='appOs'
-              onChange={(e) => {
-                setAppOs(e.target.value as AppOsType);
+              onChange={(value) => {
+                setAppOs(value as AppOsType);
               }}
-              type='radio'
-              value={'Android' as AppOsType}
+              value={item.value as AppOsType}
             />
-            <label htmlFor='android'>Android</label>
-          </div>
-          <div className='flex gap-2'>
-            <input
-              checked={appOs === 'Android'}
-              name='appOs'
-              onChange={(e) => {
-                setAppOs(e.target.value as AppOsType);
-              }}
-              type='radio'
-              value={'iOS' as AppOsType}
-            />
-            <label htmlFor='iOS'>iOS</label>
-          </div>
+          ))}
         </div>
+        <Checkbox
+          checked={isLatest}
+          label='Is latest version'
+          onChange={() => {
+            setIsLatest(!isLatest);
+          }}
+        />
+        <Checkbox
+          checked={isBlocked}
+          label='Is blocked'
+          onChange={() => {
+            setIsBlocked(!isBlocked);
+          }}
+        />
       </div>
 
       <div className='ml-auto mt-auto'>
         <Button
+          disabled={disabled}
+          loading={loading}
           onClick={() => {
-            onSubmit({ name, appOs });
+            onSubmit({ name, appOs, isBlocked, isLatest });
           }}
         >
-          Create
+          {version ? 'Update' : 'Create'}
         </Button>
       </div>
     </div>
