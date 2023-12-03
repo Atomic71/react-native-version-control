@@ -29,7 +29,7 @@ export default function UserAppsControlPanel(): JSX.Element {
   return (
     <div>
       <div className='flex justify-between items-center mb-2'>
-        <h1>Welcome to your dashboard!</h1>
+        <h1 className='text-2xl'>Welcome to your dashboard!</h1>
         <Button onClick={execute}>Create a new app</Button>
       </div>
       <div>
