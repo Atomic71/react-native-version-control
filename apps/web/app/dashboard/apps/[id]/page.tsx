@@ -33,6 +33,14 @@ export default function Page({
       void queryClient.invalidateQueries({
         queryKey: [keys.apps, params.id],
       });
+      void queryClient.invalidateQueries({
+        queryKey: [
+          keys.app_versions,
+          {
+            appId: params.id,
+          },
+        ],
+      });
     },
   });
   if (query.isLoading) {
