@@ -9,7 +9,7 @@ export const useGetAppVersions = (id: Tables<'apps'>['id']) => {
     queryKey: [
       keys.app_versions,
       {
-        app: id,
+        appId: String(id),
       },
     ],
     queryFn: async () => {
