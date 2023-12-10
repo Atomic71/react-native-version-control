@@ -30,7 +30,7 @@ export default function Page({
         onSubmit={(vals) => {
           updateMutation.mutate({
             ...vals,
-            versionId: versionInfo.id,
+            id: versionInfo.id,
           });
         }}
         version={versionInfo}
