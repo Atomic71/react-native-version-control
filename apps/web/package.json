@@ -22,6 +22,7 @@
     "axios": "^1.6.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "dayjs": "^1.11.10",
     "db": "workspace:*",
     "next": "^13.4.19",
     "react": "^18.2.0",
