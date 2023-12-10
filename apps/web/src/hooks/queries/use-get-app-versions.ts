@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import type { Tables } from 'db';
+import type { App } from 'db';
 import { browserClient } from '../../db/supabase';
 import { keys } from './keys';
 
 //eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- inference is better
-export const useGetAppVersions = (id: Tables<'apps'>['id']) => {
+export const useGetAppVersions = (id: App['id']) => {
   const query = useQuery({
     queryKey: [
       keys.app_versions,
