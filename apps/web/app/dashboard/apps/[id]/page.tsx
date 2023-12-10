@@ -75,11 +75,10 @@ export default function Page({
               <AppVersionForm
                 disabled={createVersion.isPending}
                 loading={createVersion.isPending}
-                onSubmit={({ name, appOs }) => {
+                onSubmit={(data) => {
                   createVersion.mutate({
-                    appId: app.id,
-                    name,
-                    os: appOs,
+                    ...data,
+                    app: app.id,
                   });
                 }}
               />

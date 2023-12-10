@@ -1,6 +1,7 @@
 import { Button, Input } from '@supabase/ui';
 import React, { type PropsWithChildren, useState, useEffect } from 'react';
 import type { Enums, Tables } from 'db';
+import type { CreateAppVersionPayload } from '../hooks/mutations/use-create-app-version';
 import Radio from './core/radio';
 import Checkbox from './core/checkbox';
 
@@ -17,17 +18,12 @@ export default function AppVersionForm({
   disabled = false,
   loading = false,
 }: PropsWithChildren<{
-  onSubmit: ({
-    name,
-    appOs,
-    isBlocked,
-    isLatest,
-  }: {
-    name: string;
-    appOs: AppOsType;
-    isBlocked: boolean;
-    isLatest: boolean;
-  }) => void;
+  onSubmit: (
+    payload: Pick<
+      CreateAppVersionPayload,
+      'app_os' | 'is_blocked' | 'is_latest' | 'version_number'
+    >
+  ) => void;
   version?: Tables<'app_versions'>;
   disabled: boolean;
   loading: boolean;
@@ -94,7 +90,12 @@ export default function AppVersionForm({
           disabled={disabled}
           loading={loading}
           onClick={() => {
-            onSubmit({ name, appOs, isBlocked, isLatest });
+            onSubmit({
+              version_number: name,
+              app_os: appOs,
+              is_blocked: isBlocked,
+              is_latest: isLatest,
+            });
           }}
         >
           {version ? 'Update' : 'Create'}
