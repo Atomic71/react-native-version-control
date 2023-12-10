@@ -10,7 +10,7 @@ export type AppVersion = Tables<'app_versions'>;
 
 type RelevantAppVersionInfo = Omit<AppVersion, 'created_at' | 'updated_at'>;
 export type CreateAppVersionPayload = Omit<RelevantAppVersionInfo, 'id'>;
-export type UpdateAppVersionPayload = RelevantAppVersionInfo;
+export type UpdateAppVersionPayload = Omit<RelevantAppVersionInfo, 'app'>;
 
 export type App = Tables<'apps'>;
 export type CreateAppPayload = Pick<App, 'name'>;
