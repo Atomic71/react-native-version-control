@@ -6,6 +6,9 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "build-db": {
+      "outputs": ["packages/db/src/index.types.ts"]
+    },
     "lint": {},
     "dev": {
       "cache": false,
