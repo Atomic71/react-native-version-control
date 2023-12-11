@@ -55,7 +55,7 @@ export default function Page({
 
   return (
     <div>
-      <div className='flex justify-between mb-5'>
+      <div className='flex gap-3 items-center  mb-5'>
         <h2 className='text-2xl'>App name: {app.name}</h2>
         <Button
           onClick={() => {
@@ -66,6 +66,14 @@ export default function Page({
           Delete
         </Button>
       </div>
+      <Button
+        onClick={() => {
+          void navigator.clipboard.writeText(app.app_uuid);
+        }}
+      >
+        Copy API KEY
+      </Button>
+
       <AppVersionsOverview id={app.id} />
       <Button
         onClick={() => {
